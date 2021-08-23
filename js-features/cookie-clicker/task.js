@@ -1,18 +1,18 @@
-let clickerCounter = document.getElementById('clicker__counter');
+const clickerCounter = document.getElementById('clicker__counter');
 let quantityClick = Number(clickerCounter.textContent);
-let cookie = document.getElementById('cookie');
-let clickSpeed = document.getElementById('click_speed');
+const cookie = document.getElementById('cookie');
+const clickSpeed = document.getElementById('click_speed');
 let oldTime = Date.now();
 
-function ClickСount(){
+function clickСount(){
     let newTime = Date.now();
     let chengeDat = newTime - oldTime;
-    clickSpeed.textContent = chengeDat/100;
+    clickSpeed.textContent = chengeDat/1000;
     oldTime = newTime;
     cookie.width = 250;
     quantityClick += 1;
     clickerCounter.textContent = quantityClick;
-    setTimeout(() => cookie.width = 200 , 120);
+    if(cookie.width == 250) {setTimeout(() => cookie.width = 200 , 120);} 
 }
 
-cookie.onclick = ClickСount;
+cookie.onclick = clickСount;

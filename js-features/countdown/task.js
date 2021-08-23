@@ -1,11 +1,11 @@
-let timer = document.getElementById('timer');
-let tim = Number(timer.textContent);
+const timer = document.getElementById('timer');
+let time = Number(timer.textContent);
 function Timer(){
-    let status = document.getElementById('status');
+    const status = document.getElementById('status');
     
-    if(tim !== 0){
-        tim -= 1;
-        let nowTime = tim < 10 ? '0'+ tim : tim;
+    if(time !== 0){
+        time -= 1;
+        let nowTime = time < 10 ? '0'+ time : time;
         status.textContent = '00:00:' + nowTime;
     } else {
         clearInterval(timerId);
@@ -17,4 +17,4 @@ function Timer(){
     }
 }
 
-let timerId = setInterval(Timer, 100);
+let timerId = setInterval(Timer, 1000);
