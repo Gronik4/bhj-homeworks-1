@@ -21,7 +21,7 @@ function getHole() {
 
 function outputVictory(){
     if(dead == 10){
-        alert('Победа!!!');
+        alert('Ура!!! Победа!!!');
         lost = 0;
         dead = 0;
         deadObject.textContent = 0;
