@@ -6,8 +6,8 @@ let oldTime = Date.now();
 
 function clickСount(){
     let newTime = Date.now();
-    let chengeDat = newTime - oldTime;
-    clickSpeed.textContent = chengeDat/1000;
+    let chengeDat = (newTime - oldTime)/1000;
+    clickSpeed.textContent = (1/chengeDat).toFixed(2);
     oldTime = newTime;
     cookie.width = 250;
     quantityClick += 1;
