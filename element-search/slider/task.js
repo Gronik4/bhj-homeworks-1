@@ -32,9 +32,9 @@ function prepareHendler(a) {
     let indexArr = images.indexOf(imgActive) + a;
     let index;
     switch(indexArr) {
-        case 5 : index = 0;
+        case images.length : index = 0;
         break;
-        case -1: index = 4;
+        case -1: index = images.length - 1;
         break;
         default: index = indexArr;
     }
