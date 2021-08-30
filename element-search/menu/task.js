@@ -5,12 +5,17 @@ for( let link of objectLink) {
     }    
 }
 function func(){
-    let actives = document.querySelectorAll('.menu');
-    for(let activ of actives){
-        if(activ.matches('ul[class$="menu_active"]')){activ.classList.remove('menu_active');}
-    }
     let menus = this.closest('li');
     let menu = menus.querySelector('ul');
-    menu.classList.toggle('menu_active')
+    if(menu.classList.contains('menu_active')) {
+        menu.classList.remove('menu_active');
+        return false;
+    } else {
+        let actives = document.querySelectorAll('.menu');
+        for(let activ of actives){
+            if(activ.matches('ul[class$="menu_active"]')){activ.classList.remove('menu_active');}
+        }
+        menu.classList.add('menu_active'); 
+    }
     return false;
 }
