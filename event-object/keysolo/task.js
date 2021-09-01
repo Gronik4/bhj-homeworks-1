@@ -4,10 +4,12 @@ class Game {
     this.wordElement = container.querySelector('.word');
     this.winsElement = container.querySelector('.status__wins');
     this.lossElement = container.querySelector('.status__loss');
+    this.timeElement = container.querySelector('.status__time');
 
     this.reset();
 
     this.registerEvents();
+    this.setInterval();
   }
 
   reset() {
@@ -24,6 +26,16 @@ class Game {
       В случае правильного ввода слова вызываем this.success()
       При неправильном вводе символа - this.fail();
      */
+    document.addEventListener('keyup', (event) =>{
+    let withKey = event.key.toLowerCase(); 
+    let symbol = this.currentSymbol.textContent.toLowerCase();
+    if(withKey == symbol) {
+      this.success();
+    } else {
+      this.fail();
+    } 
+    })
+    setInterval(() => this.chengeTime(), 1000);
   }
 
   success() {
@@ -31,7 +43,7 @@ class Game {
     this.currentSymbol = this.currentSymbol.nextElementSibling;
     if (this.currentSymbol !== null) {
       return;
-    }
+    } 
 
     if (++this.winsElement.textContent === 10) {
       alert('Победа!');
@@ -49,7 +61,7 @@ class Game {
   }
 
   setNewWord() {
-    const word = this.getWord();
+    const word = this.getWord(); 
 
     this.renderWord(word);
   }
@@ -68,7 +80,7 @@ class Game {
         'love',
         'javascript'
       ],
-      index = Math.floor(Math.random() * words.length);
+      index = Math.floor(Math.random() * words.length); 
 
     return words[index];
   }
@@ -83,7 +95,16 @@ class Game {
     this.wordElement.innerHTML = html;
 
     this.currentSymbol = this.wordElement.querySelector('.symbol_current');
+
+    this.timeElement.textContent = word.length;  
   }
+  chengeTime(){
+    if(--this.timeElement.textContent == 0){
+      this.fail();
+      clearInterval(this.setInterval);
+    }
+  }
+  
 }
 
 new Game(document.getElementById('game'))
