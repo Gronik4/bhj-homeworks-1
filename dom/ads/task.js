@@ -1,28 +1,34 @@
-const rotatorObject=document.querySelectorAll('.rotator__case');
-const arrRotator=Array.from(rotatorObject);
-const speedObject=document.querySelectorAll('[data-speed]');
-const arrSpeed=Array.from(speedObject);
-const colorObject=document.querySelectorAll('[data-color]');
-const arrColor=Array.from(colorObject);
-let allTime = 0;
-for(item of arrSpeed){
-    allTime += Number(item.dataset.speed);
-}
-
-/*function chengeText(time, j){
-   
-   setTimeout(() => {
-    for(let dez of rotatorObject){
-        dez.classList.remove('rotator__case_active');
-     }
-    arrRotator[j].classList.add('rotator__case_active');
-    arrRotator[j].style.color=`${arrColor[j].dataset.color}`;
-    }, time);
-}*/
-
-setInterval(() =>{
-    for(let i = 0; i < arrRotator.length; i++){
-        arrRotator[i].classList.add('rotator__case_active');
-    arrRotator[i].style.color=`${arrColor[i].dataset.color}`;
+class Slider{
+    constructor(container) {
+       this.container = container;
+       this.rotatorObject = container.querySelectorAll('.rotator__case');
+       this.j = 0;
+       this.last = this.j;
+       this.interval;
+       
+       this.start();
+       this.hendler();
     }
-}, 1000);
+    
+    start() {
+      this.interval = setInterval(() =>{
+          this.hendler();
+       },0)
+    }
+    
+    hendler() {
+       clearInterval(this.interval);
+       if(this.j === this.rotatorObject.length) {
+          this.j = 0;
+       }
+       this.rotatorObject[this.last].classList.remove('rotator__case_active');
+       this.rotatorObject[this.last = this.j].classList.add('rotator__case_active');
+       this.rotatorObject[this.last].style.color = `${this.rotatorObject[this.last].dataset.color}`; 
+       
+       this.interval = setInterval(() => {
+          this.hendler();
+          }, this.rotatorObject[this.j++].dataset.speed);
+    }
+ }
+ 
+ new Slider(document.getElementById('rotator'));
