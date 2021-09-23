@@ -17,6 +17,6 @@ function handlerHint(event) {
    div.setAttribute("data-position", "left");
    div.innerHTML = `${hint}`;
    div.classList.add('tooltip_active');
-   placeE.insertAdjacentHTML('afterend', div.outerHTML);
+   placeE.insertAdjacentElement('afterend', div);
    setTimeout(() => this.nextSibling.remove(), 1600);
 }
