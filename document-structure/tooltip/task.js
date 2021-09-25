@@ -7,16 +7,19 @@ function handlerHint(event) {
    event.preventDefault();
    let hint = event.target.title;
    let placeE = event.target.closest('a');
-   let placeHints = document.querySelectorAll('.tooltip')
-   for(let del of placeHints) {
+   if(placeE.nextSibling.classList){placeE.nextSibling.remove(); return;}
+   let deletHints = document.querySelectorAll('.tooltip')
+   for(let del of deletHints) {
       del.remove();
    }
+   let top = placeE.getBoundingClientRect().bottom + 'px';
+   let left = placeE.getBoundingClientRect().left + 'px';
+
    let div = document.createElement('div');
    div.className = 'tooltip';
-   div.style = 'left: 30%; top: 24%;';
+   div.style = `left: ${left}; top: ${top};`;
    div.setAttribute("data-position", "left");
    div.innerHTML = `${hint}`;
    div.classList.add('tooltip_active');
-   placeE.insertAdjacentElement('afterend', div);
-   setTimeout(() => this.nextSibling.remove(), 1600);
+   placeE.insertAdjacentHTML('afterend', div.outerHTML);
 }
