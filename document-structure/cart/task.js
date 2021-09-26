@@ -27,30 +27,26 @@ function addBasket(e) {
     if(value == 0){return;}
     let dateId = this.closest('.product').dataset.id;
     let imgSrc = this.closest('.product__controls').previousElementSibling.src;
-    let cartProducts = basket.querySelectorAll('.cart__product'); 
-    let  score = 0;
-    for(let  select of cartProducts) {
-        if(select.dataset.id == dateId) {
-           score = 1;
-           let t = select.querySelector('.cart__product-count').textContent;
+    let cartProducts = Array.from(basket.querySelectorAll('.cart__product')); 
+    let selected = cartProducts.find(select => select.dataset.id == dateId); 
+    if(selected){
+           let t = selected.querySelector('.cart__product-count').textContent;
            let total = Number(t) + Number(value);
-           select.querySelector('.cart__product-count').textContent = total;
-        }
-    }
-    if(score == 0) {
-       if(cart.hasAttribute('hidden')) {
-          cart.removeAttribute('hidden');
-       }
-       basket.innerHTML += `
-        <div class="cart__product" data-id="${dateId}">
-        <img class="cart__product-image" src="${imgSrc}">
-        <div class="cart__product-count">${value}</div>
-        </div>
-       `
+           selected.querySelector('.cart__product-count').textContent = total;
+    } else {
+        if(cart.hasAttribute('hidden')) {
+            cart.removeAttribute('hidden');
+         }
+         basket.innerHTML += `
+          <div class="cart__product" data-id="${dateId}">
+          <img class="cart__product-image" src="${imgSrc}">
+          <div class="cart__product-count">${value}</div>
+          </div>
+         `;
     }
 }
 
-function clearBasket(e) {
+function clearBasket() {
   let cartProduct = basket.querySelectorAll('.cart__product');
   for(let del of cartProduct) {
      del.remove();
