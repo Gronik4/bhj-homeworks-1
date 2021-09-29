@@ -10,7 +10,7 @@ xhr.onreadystatechange = function() {
       let arr = Object.values(valutes);
       loder.classList.remove('loader_active');
       for(let item of arr) {
-         let html = `<div style="display: flex;">
+         let rates = `<div style="display: flex;">
             <div class="item__code">
                 ${item.CharCode}
             </div>
@@ -22,7 +22,7 @@ xhr.onreadystatechange = function() {
             </div>
         </div>
             `;
-      items.insertAdjacentHTML('beforeend', html);
+      items.insertAdjacentHTML('beforeend', rates);
       items.style.display = 'block';
       }
    }
