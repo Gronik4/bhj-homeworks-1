@@ -38,6 +38,6 @@ window.onload = function() {
         userId.textContent = keep;
         signin.classList.remove('signin_active');
         welcome.classList.add('welcome_active');
-        localStorage.removeItem('usaid');
+        localStorage.removeItem('usaid');//Это чтоб не совсем грустно было проверять
     } 
 }
